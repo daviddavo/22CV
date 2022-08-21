@@ -1,0 +1,72 @@
+\documentclass[11pt, a4paper]{awesome-cv}
+
+% \usepackage[utf8]{inputenc} % inputenc package ignored with utf-8 based engines (XeLaTeX)
+\usepackage[english]{babel}
+\usepackage{iflang}
+\usepackage{multicol}
+\usepackage{datetime}
+
+%\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
+\geometry{margin=1in, footskip=.5cm}
+\fontdir[fonts/]
+%\colorlet{awesome}{awesome-red}
+
+\newcommand{\es}[1]{\IfLanguageName{spanish}{#1}{}}
+\newcommand{\en}[1]{\IfLanguageName{english}{#1}{}}
+
+%% Subjects
+\newif\ifquantum
+\quantumfalse
+
+%% Other ifs
+\newif\ifPersonalPage
+\PersonalPagefalse
+
+% INVPROY COLOURS
+\definecolor{chaptercolour}{HTML}{710000}
+\definecolor{sectioncolour}{HTML}{8B0000} % Darkred
+\definecolor{subsectioncolour}{HTML}{A20E0E}
+\definecolor{subsubsectioncolour}{HTML}{CDB380} %TERRA
+
+\colorlet{awesome}{awesome-red}
+
+\title{David Davó - CV}
+\author{David Davó Laviña}
+%\quote{«If, ten years from now, when you are doing something quick and dirty, you suddenly visualize that I am looking over your shoulders and say to yourself, “Dijkstra would not have liked this,” that would be enough immortality for me.»} % Dkijstra
+% Why has elegance found so little following? Elegance has the disadvantage that hard work is needed to achieve it and a good education to appreciate it. 
+\quote{«A list is only as strong as its weakest link» -- Donald E. Knuth}
+
+\name{David}{Davó}
+\lastlastname{Laviña}
+% \address{Avd Europa 42, Mejorada del Campo, 28840 Madrid}
+\es{\position{Estudiante de Ingeniería Informática}}
+\en{\position{Computer Science Student}}
+
+% \mobile{}
+\email{david@ddavo.me}
+\homepage{
+    \en{https://ddavo.me/en}
+    \es{https://ddavo.me/es}
+}{ddavo.me}
+\github{daviddavo}
+\gitlab{daviddavo}
+\linkedin{ddavo}
+\phone{+34 622 783 513}
+
+\begin{document}
+\makecvheader[C]
+
+\makecvfooter
+  {\monthname\ \number\year}
+  {David Davó Laviña}
+  {\thepage}
+
+\input{resume/summary.tex}
+\input{resume/skills.tex}
+\input{resume/projects.tex}
+\input{resume/honors.tex}
+\input{resume/extracurricular.tex}
+\input{resume/experience.tex}
+\input{resume/education.tex}
+
+\end{document}
