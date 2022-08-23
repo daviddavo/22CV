@@ -1,7 +1,11 @@
 \documentclass[11pt, a4paper]{awesome-cv}
 
 % \usepackage[utf8]{inputenc} % inputenc package ignored with utf-8 based engines (XeLaTeX)
-\usepackage[english]{babel}
+\ifdefined\babellang
+    \usepackage[\babellang]{babel}
+\else
+    \usepackage[english]{babel}
+\fi
 \usepackage{iflang}
 \usepackage{multicol}
 \usepackage{datetime}
