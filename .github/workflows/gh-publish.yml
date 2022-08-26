@@ -33,6 +33,7 @@ jobs:
             spanish.tex
       - name: Assert built files are 2 pages long
         run: |
+          sudo apt-get install -y pdfinfo
           [ $(pdfinfo english.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
           [ $(pdfinfo spanish.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
       - name: Build page
