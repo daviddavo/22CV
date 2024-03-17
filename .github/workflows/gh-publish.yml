@@ -41,7 +41,7 @@ jobs:
           mv english.pdf _site/David_Davo_CV_English.pdf
           mv spanish.pdf _site/David_Davo_CV_Spanish.pdf
       - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v1.0.3
+        uses: actions/upload-pages-artifact@v3
         
       # TODO: Check number of pages is less than 2 with `qpdf --show-npages`
   # Deploy it as a GitHub page
@@ -64,5 +64,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: build
