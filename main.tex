@@ -4,7 +4,7 @@
 \ifdefined\babellang
     \usepackage[\babellang]{babel}
 \else
-    \usepackage[english]{babel}
+    \usepackage[spanish]{babel}
 \fi
 \usepackage{iflang}
 \usepackage{multicol}
@@ -13,6 +13,7 @@
 %\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}
 \geometry{margin=1in, footskip=.5cm}
 \fontdir[fonts/]
+\addbibresource{publications.bib}
 %\colorlet{awesome}{awesome-red}
 
 \newcommand{\es}[1]{\IfLanguageName{spanish}{#1}{}}
@@ -74,5 +75,7 @@
 \input{resume/honors.tex}
 \input{resume/projects.tex}
 \input{resume/extracurricular.tex}
+\newpage
+\input{resume/publications.tex}
 
 \end{document}
