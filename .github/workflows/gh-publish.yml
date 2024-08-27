@@ -27,6 +27,7 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           latexmk_use_xelatex: true
+          texlive_version: 2022
           # Compile multiple documents
           root_file: |
             english.tex
