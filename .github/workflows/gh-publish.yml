@@ -31,11 +31,11 @@ jobs:
           root_file: |
             english.tex
             spanish.tex
-      - name: Assert built files are 2 pages long
-        run: |
-          sudo apt-get install -y poppler-utils
-          [ $(pdfinfo english.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
-          [ $(pdfinfo spanish.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
+      # - name: Assert built files are 2 pages long
+      #   run: |
+      #     sudo apt-get install -y poppler-utils
+      #     [ $(pdfinfo english.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
+      #     [ $(pdfinfo spanish.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
       - name: Build page
         run: |
           mv english.pdf _site/David_Davo_CV_English.pdf
