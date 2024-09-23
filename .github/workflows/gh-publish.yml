@@ -27,9 +27,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           latexmk_use_xelatex: true
-          texlive_version: 2024
           # Compile multiple documents
           root_file: |
+            main.tex
             english.tex
             spanish.tex
       # - name: Assert built files are 2 pages long
@@ -39,6 +39,7 @@ jobs:
       #     [ $(pdfinfo spanish.pdf | awk '/^Pages:/ {print $2}') -le 2 ]
       - name: Build page
         run: |
+          mv main.pdf _site/David_Davo_CV_debug.pdf
           mv english.pdf _site/David_Davo_CV_English.pdf
           mv spanish.pdf _site/David_Davo_CV_Spanish.pdf
       - name: Upload GitHub Pages artifact
