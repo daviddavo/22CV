@@ -29,10 +29,7 @@ jobs:
           latexmk_use_xelatex: true
           texlive_version: 2024
           # Compile multiple documents
-          root_file: |
-            main.tex
-            english.tex
-            spanish.tex
+          root_file: '*.tex'
       # - name: Assert built files are 2 pages long
       #   run: |
       #     sudo apt-get install -y poppler-utils
