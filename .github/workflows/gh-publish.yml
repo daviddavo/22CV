@@ -23,14 +23,19 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v4
-      - name: Build LaTeX
-        uses: xu-cheng/latex-action@v3
+      # - name: Build LaTeX
+      #   uses: xu-cheng/latex-action@v3
+      #   with:
+      #     latexmk_use_xelatex: true
+      #     texlive_version: 2024
+      #     # Compile multiple documents
+      #     root_file: '*.tex'
+      #     latexmk_shell_escape: true
+      - uses: xu-cheng/texlive-action@v2
         with:
-          latexmk_use_xelatex: true
-          texlive_version: 2024
-          # Compile multiple documents
-          root_file: '*.tex'
-          latexmk_shell_escape: true
+          scheme: full
+          run: |
+            latexmk -xelatex *.tex
       # - name: Assert built files are 2 pages long
       #   run: |
       #     sudo apt-get install -y poppler-utils
