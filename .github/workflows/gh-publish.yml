@@ -27,7 +27,7 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           latexmk_use_xelatex: true
-          texlive_version: 2022
+          texlive_version: 2023
           # Compile multiple documents
           root_file: '*.tex'
           latexmk_shell_escape: true
