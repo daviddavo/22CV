@@ -170,8 +170,7 @@
 \newcommand*{\bodyfont}{\sourcesanspro}
 \newcommand*{\bodyfontlight}{\sourcesansprolight}
 
-% \setCJKmainfont{IPAMincho}
-% \setCJKmainfont{Noto Sans CJK JP}
+\setCJKmainfont{Noto Sans CJK JP}
 
 %-------------------------------------------------------------------------------
 %                Configuration for styles
@@ -185,7 +184,7 @@
 \newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
 \newcommand*{\headerquotestyle}[1]{{\fontsize{9pt}{1em}\bodyfont\itshape\color{darktext} #1}}
 \newcommand*{\footerstyle}[1]{{\fontsize{8pt}{1em}\footerfont\scshape\color{lighttext} #1}}
-\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\sectionstyle}[1]{{\fontsize{16pt}{1em}\bodyfont\bfseries\color{text}\ifdefined\IfLanguageName\IfLanguageName{japanese}{\ifbool{acvSectionColorHighlight}{\color{awesome}}{}#1}{\@sectioncolor #1}\else\@sectioncolor #1\fi}}
 \newcommand*{\subsectionstyle}[1]{{\fontsize{12pt}{1em}\bodyfont\scshape\textcolor{text}{#1}}}
 \newcommand*{\paragraphstyle}{\fontsize{9pt}{1em}\bodyfontlight\upshape\color{text}}
 
@@ -215,7 +214,7 @@
 \newcommand*{\skillsetstyle}[1]{{\fontsize{9pt}{1em}\bodyfontlight\color{text} #1}}
 
 % For elements of the cover letter
-\newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\@sectioncolor #1}}
+\newcommand*{\lettersectionstyle}[1]{{\fontsize{14pt}{1em}\bodyfont\bfseries\color{text}\ifdefined\IfLanguageName\IfLanguageName{japanese}{\ifbool{acvSectionColorHighlight}{\color{awesome}}{}#1}{\@sectioncolor #1}\else\@sectioncolor #1\fi}}
 \newcommand*{\recipientaddressstyle}[1]{{\fontsize{9pt}{1em}\bodyfont\scshape\color{graytext} #1}}
 \newcommand*{\recipienttitlestyle}[1]{{\fontsize{11pt}{1em}\bodyfont\bfseries\color{darktext} #1}}
 \newcommand*{\lettertitlestyle}[1]{{\fontsize{10pt}{1em}\bodyfontlight\bfseries\color{darktext} \underline{#1}}}
@@ -255,6 +254,9 @@
 \newcommand*{\lastname}[1]{\def\@lastname{#1}}
 \newcommand*{\familyname}[1]{\def\@lastname{#1}}
 \newcommand*{\lastlastname}[1]{\def\@lastlastname{#1}}
+\newcommand*{\janame}[2]{\def\@jafirstname{#1}\def\@jalastname{#2}}
+\def\@jafirstname{}
+\def\@jalastname{}
 \def\@familyname{\@lastname}
 
 % Define writer's address
@@ -433,6 +435,15 @@
 %-------------------------------------------------------------------------------
 %                Commands for elements of CV structure
 %-------------------------------------------------------------------------------
+% Helper for Japanese furigana in the header
+\newcommand{\jaHeaderRuby}[3]{%
+  \leavevmode
+  \begin{tabular}[b]{@{}c@{}}
+    \fontsize{10pt}{1em}\bodyfont\color{graytext}#2 \\[-0.5ex]
+    #3{#1}
+  \end{tabular}%
+}
+
 % Define a header for CV
 % Usage: \makecvheader
 \newcommand*{\makecvheader}[1][C]{%
@@ -464,8 +475,18 @@
   \end{minipage}
   \begin{minipage}[c]{\headertextwidth}
     \ifthenelse{\equal{#1}{L}}{\raggedright}{\ifthenelse{\equal{#1}{R}}{\raggedleft}{\centering}}
-    \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
-    \headerfirstnamestyle{{}\acvHeaderNameDelim\@lastlastname}
+    \ifdefined\IfLanguageName
+      \IfLanguageName{japanese}{%
+        \jaHeaderRuby{\@firstname}{\@jafirstname}{\headerfirstnamestyle}%
+        \acvHeaderNameDelim%
+        \jaHeaderRuby{\@lastname}{\@jalastname}{\headerlastnamestyle}%
+      }{%
+        \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+        \IfLanguageName{spanish}{\headerfirstnamestyle{{}\acvHeaderNameDelim\@lastlastname}}{}%
+      }%
+    \else
+      \headerfirstnamestyle{\@firstname}\headerlastnamestyle{{}\acvHeaderNameDelim\@lastname}%
+    \fi
     \\[\acvHeaderAfterNameSkip]%
     \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\[\acvHeaderAfterPositionSkip]}}%
     \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\[\acvHeaderAfterAddressSkip]}}%
